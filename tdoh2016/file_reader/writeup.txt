@@ -1,0 +1,4 @@
+flag: TDOH{Y0U_AR3_7H3_\/\/1NN3R}
+
+Simple buffer overflow.
+Just input aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflag
