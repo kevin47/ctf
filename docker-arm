@@ -1,0 +1,6 @@
+sudo docker run -it -m 4000m --cpus="8" -p 7122:7122 --privileged -v /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static arm bash
+
+-m 4000m: memory 4GB
+-p 7122:7122: bind port 7122 of host and vm
+--privileged: to allow gdb disable ASLR
+-v /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static: use qemu to run

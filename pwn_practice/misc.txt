@@ -1,0 +1,1 @@
+stack guard ends with \x00

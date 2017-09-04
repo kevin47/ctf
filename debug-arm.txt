@@ -1,0 +1,8 @@
+qemu-arm -g 1234 ./binary
+
+--------------------------
+
+gdb-multiarch
+file binary
+set architecture arm
+target remote 127.0.0.1:1234

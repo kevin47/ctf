@@ -1,0 +1,12 @@
+PUT
+
+DE[
+DUMP
+PUT
+AAA
+0
+GET
+AAA
+GET
+BBB
+EXIT

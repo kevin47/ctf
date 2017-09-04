@@ -1,0 +1,62 @@
+a    0:   61                      (bad)  
+b    0:   62 41                   (bad)  
+c    0:   63 41 43                movsxd eax,DWORD PTR [rcx+0x43]
+d    0:   64 41                   fs rex.B
+e    0:   65 41                   gs rex.B
+f    0:   66 41                   data16 rex.B
+g    0:   67 41                   addr32 rex.B
+h    0:   68 41 43 42 44          push   0x44424341
+i    0:   69 41 43 42 44 45 46    imul   eax,DWORD PTR [rcx+0x43],0x46454442
+j    0:   6a 41                   push   0x41
+k    0:   6b 41 43 42             imul   eax,DWORD PTR [rcx+0x43],0x42
+l    0:   6c                      ins    BYTE PTR es:[rdi],dx
+m    0:   6d                      ins    DWORD PTR es:[rdi],dx
+n    0:   6e                      outs   dx,BYTE PTR ds:[rsi]
+o    0:   6f                      outs   dx,DWORD PTR ds:[rsi]
+p    0:   70 41                   jo     0x43
+q    0:   71 41                   jno    0x43
+r    0:   72 41                   jb     0x43
+s    0:   73 41                   jae    0x43
+t    0:   74 41                   je     0x43
+u    0:   75 41                   jne    0x43
+v    0:   76 41                   jbe    0x43
+w    0:   77 41                   ja     0x43
+x    0:   78 41                   js     0x43
+y    0:   79 41                   jns    0x43
+z    0:   7a 41                   jp     0x43
+A    0:   41                      rex.B
+B    0:   42                      rex.X
+C    0:   43                      rex.XB
+D    0:   44                      rex.R
+E    0:   45                      rex.RB
+F    0:   46                      rex.RX
+G    0:   47                      rex.RXB
+H    0:   48                      rex.W
+I    0:   49                      rex.WB
+J    0:   4a                      rex.WX
+K    0:   4b                      rex.WXB
+L    0:   4c                      rex.WR
+M    0:   4d                      rex.WRB
+N    0:   4e                      rex.WRX
+O    0:   4f                      rex.WRXB
+P    0:   50                      push   rax
+Q    0:   51                      push   rcx
+R    0:   52                      push   rdx
+S    0:   53                      push   rbx
+T    0:   54                      push   rsp
+U    0:   55                      push   rbp
+V    0:   56                      push   rsi
+W    0:   57                      push   rdi
+X    0:   58                      pop    rax
+Y    0:   59                      pop    rcx
+Z    0:   5a                      pop    rdx
+0    0:   30 41 43                xor    BYTE PTR [rcx+0x43],al
+1    0:   31 41 43                xor    DWORD PTR [rcx+0x43],eax
+2    0:   32 41 43                xor    al,BYTE PTR [rcx+0x43]
+3    0:   33 41 43                xor    eax,DWORD PTR [rcx+0x43]
+4    0:   34 41                   xor    al,0x41
+5    0:   35 41 43 42 44          xor    eax,0x44424341
+6    0:   36 41                   ss rex.B
+7    0:   37                      (bad)  
+8    0:   38 41 43                cmp    BYTE PTR [rcx+0x43],al
+9    0:   39 41 43                cmp    DWORD PTR [rcx+0x43],eax

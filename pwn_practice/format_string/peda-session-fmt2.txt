@@ -1,0 +1,5 @@
+break main
+break *0x4006a1
+break * 0x00007ffff7a628a0
+break b
+

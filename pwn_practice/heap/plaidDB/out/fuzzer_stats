@@ -1,0 +1,27 @@
+start_time        : 1503419418
+last_update       : 1503451362
+fuzzer_pid        : 6253
+cycles_done       : 0
+execs_done        : 3885609
+execs_per_sec     : 120.61
+paths_total       : 343
+paths_favored     : 132
+paths_found       : 339
+paths_imported    : 0
+max_depth         : 8
+cur_path          : 311
+pending_favs      : 30
+pending_total     : 176
+variable_paths    : 0
+stability         : 100.00%
+bitmap_cvg        : 1.10%
+unique_crashes    : 2
+unique_hangs      : 0
+last_path         : 1503451063
+last_crash        : 1503446098
+last_hang         : 0
+execs_since_crash : 631445
+exec_timeout      : 40
+afl_banner        : datastore.elf
+afl_version       : 2.50b
+command_line      : afl-fuzz -i in -o out -Q -- ./datastore.elf

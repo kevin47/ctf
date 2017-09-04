@@ -1,0 +1,18 @@
+function call register order:
+    rax, rdi, rsi, rdx, rcx, r8, r9
+
+gadgets:
+    pop r14 = 0x415e / pop rsi = 0x5e
+    pop r15 = 0x415f / pop rdi = 0x5f
+
+ROPgadget default depth isn't enough:
+    ROPgadget --binary ./b --depth 100
+
+control rax:
+	gets, fgets, strcpy return buffer (rax = rdi)
+	strncpy doesn't crash if n = 0 (best)
+	alarm returns previous alarm remaining time (call twice consecutive)
+
+rcx:
+	no universal method to control
+	leak libc address after syscall
