@@ -8,3 +8,6 @@ partial: src.c
 
 full: src.c	
 	gcc src.c -o full -fno-stack-protector -Wl,-z,relro,-z,now -m32
+
+clean:
+	rm -f no partial full

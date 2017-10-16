@@ -1,0 +1,3 @@
+nasm -f elf32 cat.asm 
+ld -m elf_i386 cat.o -o cat
+objcopy -O binary cat.o 

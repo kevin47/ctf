@@ -1,0 +1,24 @@
+
+_dl_runtime_resolve(link_map, reloc_arg)
+                                  |
+            __________            |
+           |Elf64_Rel | <---------+
+           |----------|
+      +--- | r_offset |         _____________
+      |    | r_info   | -----> |  Elf64_Sym  |           __________
+      |    |__________|        |-------------|          |          |
+      |                        |   st_name   | -------> | printf\0 |
+      |     .rel.plt           |_____________|          |__________|
+      v
+  __________                       .dynsym                 .dynstr
+ |          |
+ | <printf> |
+ |__________|
+
+  .got.plt
+
+
+
+link_map->l_info[5]	dynstr
+link_map->l_info[6]	dynsym
+

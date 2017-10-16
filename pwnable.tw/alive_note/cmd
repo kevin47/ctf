@@ -1,0 +1,62 @@
+a    0:   61                      popa   
+b    0:   62 41 43                bound  eax,QWORD PTR [ecx+0x43]
+c    0:   63 41 43                arpl   WORD PTR [ecx+0x43],ax
+d    0:   64 41                   fs inc ecx
+e    0:   65 41                   gs inc ecx
+f    0:   66 41                   inc    cx
+g    0:   67 41                   addr16 inc ecx
+h    0:   68 41 43 42 44          push   0x44424341
+i    0:   69 41 43 42 44 45 46    imul   eax,DWORD PTR [ecx+0x43],0x46454442
+j    0:   6a 41                   push   0x41
+k    0:   6b 41 43 42             imul   eax,DWORD PTR [ecx+0x43],0x42
+l    0:   6c                      ins    BYTE PTR es:[edi],dx
+m    0:   6d                      ins    DWORD PTR es:[edi],dx
+n    0:   6e                      outs   dx,BYTE PTR ds:[esi]
+o    0:   6f                      outs   dx,DWORD PTR ds:[esi]
+p    0:   70 41                   jo     0x43
+q    0:   71 41                   jno    0x43
+r    0:   72 41                   jb     0x43
+s    0:   73 41                   jae    0x43
+t    0:   74 41                   je     0x43
+u    0:   75 41                   jne    0x43
+v    0:   76 41                   jbe    0x43
+w    0:   77 41                   ja     0x43
+x    0:   78 41                   js     0x43
+y    0:   79 41                   jns    0x43
+z    0:   7a 41                   jp     0x43
+A    0:   41                      inc    ecx
+B    0:   42                      inc    edx
+C    0:   43                      inc    ebx
+D    0:   44                      inc    esp
+E    0:   45                      inc    ebp
+F    0:   46                      inc    esi
+G    0:   47                      inc    edi
+H    0:   48                      dec    eax
+I    0:   49                      dec    ecx
+J    0:   4a                      dec    edx
+K    0:   4b                      dec    ebx
+L    0:   4c                      dec    esp
+M    0:   4d                      dec    ebp
+N    0:   4e                      dec    esi
+O    0:   4f                      dec    edi
+P    0:   50                      push   eax
+Q    0:   51                      push   ecx
+R    0:   52                      push   edx
+S    0:   53                      push   ebx
+T    0:   54                      push   esp
+U    0:   55                      push   ebp
+V    0:   56                      push   esi
+W    0:   57                      push   edi
+X    0:   58                      pop    eax
+Y    0:   59                      pop    ecx
+Z    0:   5a                      pop    edx
+0    0:   30 41 43                xor    BYTE PTR [ecx+0x43],al
+1    0:   31 41 43                xor    DWORD PTR [ecx+0x43],eax
+2    0:   32 41 43                xor    al,BYTE PTR [ecx+0x43]
+3    0:   33 41 43                xor    eax,DWORD PTR [ecx+0x43]
+4    0:   34 41                   xor    al,0x41
+5    0:   35 41 43 42 44          xor    eax,0x44424341
+6    0:   36 41                   ss inc ecx
+7    0:   37                      aaa    
+8    0:   38 41 43                cmp    BYTE PTR [ecx+0x43],al
+9    0:   39 41 43                cmp    DWORD PTR [ecx+0x43],eax
